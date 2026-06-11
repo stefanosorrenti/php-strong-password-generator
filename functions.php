@@ -5,18 +5,11 @@ $checkedValue = '';
 $onlyNumbers =  isset($_GET["onlyNumbers"]) ?  $checkedValue .= 'number ' : '';
 $onlyChar = isset($_GET["onlyChar"]) ?  $checkedValue .= 'char ' : '';
 $onlySymb = isset($_GET["onlySymb"]) ?  $checkedValue .= 'symb ' : '';
-
-var_dump($onlyNumbers);
-var_dump($onlyChar);
-var_dump($onlySymb);
-var_dump($checkedValue);
-
-
-$error = false;
+$error = null;
 
 if ($length && !is_numeric($length) || is_numeric($length) && $length < 10 || $length > 20) {
     $error = true;
-    echo 'ERRORE';
+    header("Location: ./server.php");
 } else {
 
     function getRandomPassword($passLength, $filters)
@@ -61,10 +54,11 @@ if ($length && !is_numeric($length) || is_numeric($length) && $length < 10 || $l
 
                 $singleChars = substr($totalChars, $startNumber, 1);
                 $passGen .= $singleChars;
+                
             };
         };
 
-
+    $error = false;
         return $passGen;
     };
 };
