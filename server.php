@@ -1,3 +1,20 @@
+<?php
+$length = isset($_GET["length"]) ?  $_GET["length"] : '' ;
+
+if($length && !is_numeric($length) || $length  > 20 || $length < 0) {
+    
+     
+} else {
+     echo 'OK';
+};
+    
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,11 +36,13 @@
 
         <form>
             <label for="length">Lunghezza della password</label>
-            <input type="number" name="length" id="length">
+            <input type="number" name="length" id="length" min="0" max="20" required>
             <button>Genera</button>
         </form>
 
     </div>
+
+    <span><?php echo 'Password generata:'  ?></span>
 
 </body>
 
