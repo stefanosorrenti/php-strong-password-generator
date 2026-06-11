@@ -1,13 +1,36 @@
 <?php
-$length = isset($_GET["length"]) ?  $_GET["length"] : '' ;
+$length = isset($_GET["length"]) ?  $_GET["length"] : '';
+$error = false;
 
-if($length && !is_numeric($length) || $length  > 20 || $length < 0) {
-    
-     
+if ($length && !is_numeric($length) || is_numeric($length) && $length < 10 || $length > 20) {
+    $error = true;
+    echo 'ERRORE';
 } else {
-     echo 'OK';
+
+    function getRandomPassword($passLength)
+    {
+
+
+        $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+        $passGen = '';
+
+        
+        if ($passLength) {
+            
+            for ($i = 0; $i < $passLength; $i++) {
+
+                $startNumber = rand(0, 61);
+                
+                $singleChars = substr($chars, $startNumber, 1);
+                $passGen .= $singleChars;
+            };
+        };
+
+        return $passGen;
+    };
 };
-    
+
 
 
 
@@ -30,19 +53,20 @@ if($length && !is_numeric($length) || $length  > 20 || $length < 0) {
 </header>
 
 <!-- Body -->
+
 <body>
     <!-- FORM -->
-    <div>   
+    <div>
 
         <form>
             <label for="length">Lunghezza della password</label>
-            <input type="number" name="length" id="length" min="0" max="20" required>
+            <input type="number" name="length" id="length" min="10" max="20" required>
             <button>Genera</button>
         </form>
 
     </div>
 
-    <span><?php echo 'Password generata:'  ?></span>
+    <span><?php echo $error ? '' : 'Password generata: ' . getRandomPassword($length) ?></span>
 
 </body>
 
