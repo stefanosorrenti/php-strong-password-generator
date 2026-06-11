@@ -24,12 +24,26 @@ require_once("./functions.php")
         <form>
             <label for="length">Lunghezza della password</label>
             <input type="number" name="length" id="length" min="10" max="20" required>
+
+            <label for="onlyNumbers">
+                Solo numeri
+                <input type="checkbox" name="onlyNumbers" id="onlyNumbers">
+            </label>
+
+            <label for="onlyChar">
+                Solo lettere
+                <input type="checkbox" name="onlyChar" id="onlyChar">
+            </label>
+            <label for="onlySymb">
+                Solo simboli
+                <input type="checkbox" name="onlySymb" id="onlySymb">
+            </label>
             <button>Genera</button>
         </form>
 
     </div>
 
-    <span><?php echo $error ? '' : 'Password generata: ' . getRandomPassword($length) ?></span>
+    <span><?php echo $error ? '' : 'Password generata: ' . getRandomPassword($length, $checkedValue) ?></span>
 
 </body>
 
